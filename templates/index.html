@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To Do List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style type="text/css">
+    footer{
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="margin-top:100px;">
+
+    <h2>To Do List</h2>
+
+    <hr>
+    <form method="post" action="/add">
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Basliq</label>
+            <input class="form-control" name="basliq" id="exampleInputPassword1" placeholder="Basliqi Daxil Edin..">
+        </div>
+        <button type="submit" class="btn btn-danger">Submit</button>
+    </form>
+
+    <br><br>
+    <h4>Tamamlanan Tasklar : <b>{{tamamlanan}}</b></h4>
+    <br><hr><br>
+    {% if data %}
+        <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col"><b>Id</th>
+      <th scope="col"><b>Basdiq</th>
+      <th scope="col"><b>Durum</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for todo in data  %}
+     <tr>
+        <th scope="row">{{todo.id}}</th>
+        <td>
+        
+
+        {% if todo.complate==False %}
+        <b><i>
+        <div class="card">
+            <div class="card-body">
+                {{todo.title}}
+            </div>
+        </div>
+        {% else %}
+            <del><i>
+              <div class="card">
+            <div class="card-body">
+                {{todo.title}}
+            </div>
+            </div>
+            </del></i>
+        {% endif %}
+        
+        
+        </td>
+        <td>
+        {% if todo.complate==False %}
+            Tamamlanmadi    
+        {% else %}
+            Tamamlandi
+        {% endif %}
+    
+        </td>
+
+        <td>
+        {% if todo.complate==False  %}
+            <a href="complate/{{todo.id}}"><button type="button" class="btn btn-outline-success btn-sm">>>Tamamla</button></a>
+        {% else %}
+            <a href="complate/{{todo.id}}"><button type="button" class="btn btn-outline-danger btn-sm">Tamamlama</button></a>
+        {% endif %}
+        </td>
+
+        <td><a href="update/{{todo.id}}"><button type="button" class="btn btn-outline-primary btn-sm">Guncenlle</button></td>
+
+        <td><a href="delete/{{todo.id}}"><button type="button" class="btn btn-outline-dark btn-sm">Sil</button></td>
+     </tr>
+    {% endfor %}
+ 
+  </tbody>
+</table>
+
+
+
+
+
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            Hec bir Task Yoxdur
+        </div>
+    {% endif %}
+    
+    
+
+</div>
+
+<br><br><br><br><br><br>
+<br><br><br>
+
+<footer class="page-footer font-small blue pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">>> To Do List <<</h5>
+        <p>Founders: <b> Haji Davud </b>,<b> Hajili Sadig</b>, Baxisli Nihat</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Twitter</a>
+          </li>
+          <li>
+            <a href="#!">Youtube</a>
+          </li>
+     
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase"></h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Fecebook</a>
+          </li>
+          <li>
+            <a href="#!">Instagram</a>
+          </li>
+
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright
+
+  </div>
+  <!-- Copyright -->
+
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
